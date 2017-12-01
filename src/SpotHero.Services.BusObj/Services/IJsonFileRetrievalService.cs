@@ -6,6 +6,6 @@ namespace SpotHero.Services.BusObj.Services
 {
     public interface IJsonFileRetrievalService
     {
-        string GetRatesJsonFile();
+        string GetRatesJson();
     }
 }

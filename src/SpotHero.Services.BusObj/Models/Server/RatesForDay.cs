@@ -5,7 +5,7 @@ namespace SpotHero.Services.BusObj.Models.Server
 {
     public class RatesForDay
     {
-        DayOfWeek Day { get; set; }
-        List<RateForTimePeriod> Rates { get; set; }
+        public DayOfWeek Day { get; set; }
+        public List<RateForTimePeriod> Rates { get; set; }
     }
 }

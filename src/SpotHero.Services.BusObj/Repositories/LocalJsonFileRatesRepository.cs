@@ -10,12 +10,15 @@ namespace SpotHero.Services.BusObj.Repositories
     {
         protected IJsonFileRetrievalService JsonFileRetrievalService { get; }
 
-        protected Dictionary<DayOfWeek, List<RateForTimePeriod>> RatesDictionary { get; } = new Dictionary<DayOfWeek, List<RateForTimePeriod>>();
+        protected Dictionary<DayOfWeek, List<RateForTimePeriod>> RatesDictionary { get; }
 
-        public LocalJsonFileRatesRepository(IJsonFileRetrievalService jsonFileRetrievalService)
+        public LocalJsonFileRatesRepository(IJsonFileRetrievalService jsonFileRetrievalService, IJsonFileParserService jsonFileParserService)
 	    {
-            JsonFileRetrievalService = jsonFileRetrievalService;
-	    }
+            var ratesJson = jsonFileRetrievalService.GetRatesJson();
+            var rates = jsonFileParserService.GetRatesFromJson(ratesJson);
+            RatesDictionary = rates.ToDictionary(r => r.Day, r => r.Rates);
+            
+        }
 
         public RateForTimePeriod GetRateForTimePeriod(DateTime startTime, DateTime endTime) 
         {
@@ -27,7 +30,7 @@ namespace SpotHero.Services.BusObj.Repositories
 
             var availableRates = RatesDictionary[startTime.DayOfWeek].OrderBy(d => d.StartTime);
 
-            var activeRate = availableRates.FirstOrDefault(r => r.StartTime >= startTime && r.EndTime <= endTime);
+            var activeRate = availableRates.FirstOrDefault(r => r.StartTime <= startTime && endTime <= r.EndTime);
 
             // if no match, returns null
             return activeRate;
