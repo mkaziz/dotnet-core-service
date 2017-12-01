@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace spothero.services.api
+namespace SpotHero.Services.Api
 {
     public class Startup
     {

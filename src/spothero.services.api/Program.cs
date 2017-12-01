@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace spothero.services.api
+namespace SpotHero.Services.Api
 {
     public class Program
     {
