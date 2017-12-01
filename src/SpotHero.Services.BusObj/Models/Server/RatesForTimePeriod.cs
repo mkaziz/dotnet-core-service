@@ -2,11 +2,11 @@ using System;
 
 namespace SpotHero.Services.BusObj.Models.Server
 {
-    public class RatesForTimePeriod
+    public class RateForTimePeriod
     {
-        DateTime StartTime { get; set; }
-        DateTime EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
-        Decimal Price { get; }
+        public Decimal Price { get; }
     }
 }

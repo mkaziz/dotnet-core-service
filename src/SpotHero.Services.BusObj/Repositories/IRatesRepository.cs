@@ -6,6 +6,6 @@ namespace SpotHero.Services.BusObj.Repositories
 {
     public interface IRatesRepository
     {
-        List<RatesForTimePeriod> GetRatesForTimePeriod(DateTime startTime, DateTime endTime);
+        RateForTimePeriod GetRateForTimePeriod(DateTime startTime, DateTime endTime);
     }
 }
