@@ -13,7 +13,7 @@ namespace SpotHero.Services.Api.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            
+            return new List<string>();
         }
 
         // GET api/values/5
