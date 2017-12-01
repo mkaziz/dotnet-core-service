@@ -13,7 +13,7 @@ namespace SpotHero.Services.BusObj.Repositories
 
         public List<RatesForTimePeriod> GetRatesForTimePeriod(DateTime startTime, DateTime endTime) 
         {
-
+            return new List<RatesForTimePeriod>();
         }
     }
 }
