@@ -25,12 +25,43 @@ namespace SpotHero.Services.BusObj.Repositories
             if (startTime.Date != endTime.Date)
                 return null; // not supporting overnight parking at this time. 
 
+            if (endTime < startTime)
+                throw new ArgumentOutOfRangeException($"{nameof(endTime)} must come after {nameof(startTime)}");
+
             if (!RatesDictionary.ContainsKey(startTime.DayOfWeek))
                 return null; // garage not open
 
             var availableRates = RatesDictionary[startTime.DayOfWeek].OrderBy(d => d.StartTime);
 
             var activeRate = availableRates.FirstOrDefault(r => r.StartTime <= startTime && endTime <= r.EndTime);
+
+            if (activeRate == null)
+            {
+                // no perfect match
+
+                var overlappingRates = availableRates.Where(r => r.StartTime < endTime)
+                                                     .Intersect(availableRates.Where(r => startTime <= r.EndTime));
+
+                if (!overlappingRates.Any())
+                    return null; // out of bounds
+
+                var areContiguous = true;
+                var seedTime = overlappingRates.FirstOrDefault().StartTime;
+
+                foreach (var rate in overlappingRates)
+                {
+                    areContiguous &= rate.StartTime == seedTime;
+
+                    if (!areContiguous)
+                        return null; // garage is closed for some time
+
+                    seedTime = rate.EndTime;
+                }
+
+                if (areContiguous)
+                    return overlappingRates.OrderByDescending(r => r.Price).FirstOrDefault();
+                
+            }
 
             // if no match, returns null
             return activeRate;
