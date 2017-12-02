@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using SpotHero.Services.BusObj.Repositories;
 using SpotHero.Services.BusObj.Configuration;
 using SpotHero.Services.BusObj.Services;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace SpotHero.Services.Api
 {
@@ -26,7 +27,12 @@ namespace SpotHero.Services.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true; // false by default
+            })
+            .AddXmlSerializerFormatters();
+
             services.AddScoped<IRatesRepository, RatesRepository>();
             services.AddScoped<IJsonFileRetrievalService, JsonFileRetrievalService>();
             services.AddScoped<IJsonFileParserService, JsonFileParserService>();

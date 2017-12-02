@@ -19,8 +19,15 @@ namespace SpotHero.Services.Api.Controllers
         [HttpGet]
         public string Get(string startDate, string endDate)
         {
-            var start = DateTime.Parse(startDate);
-            var end = DateTime.Parse(endDate);
+            DateTime start;
+            DateTime end;
+
+            if (!DateTime.TryParse(startDate, out start))
+                throw new ArgumentException($"Could not parse ${nameof(startDate)}: {startDate} into a DateTime");
+
+            if (!DateTime.TryParse(endDate, out end))
+                throw new ArgumentException($"Could not parse ${nameof(endDate)}: {endDate} into a DateTime");
+
             return RatesRepository.GetRateForTimePeriod(start, end)?.Price.ToString() ?? "NOT AVAILABLE";
         }
         
