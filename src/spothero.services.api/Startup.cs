@@ -37,6 +37,7 @@ namespace SpotHero.Services.Api
             services.AddScoped<IJsonFileRetrievalService, JsonFileRetrievalService>();
             services.AddScoped<IJsonFileParserService, JsonFileParserService>();
 
+            services.AddSingleton<IStatisticsRepository, StatisticsRepository>();
             services.AddSingleton(Configuration.GetSection("appSettings").Get<AppSettings>() as IAppSettings);
 
         }

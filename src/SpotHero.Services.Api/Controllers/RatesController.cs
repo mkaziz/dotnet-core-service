@@ -11,14 +11,18 @@ namespace SpotHero.Services.Api.Controllers
     public class RatesController : Controller
     {
         protected IRatesRepository RatesRepository { get; }
-        public RatesController(IRatesRepository ratesRepository)
+        protected IStatisticsRepository StatisticsRepository { get; }
+        public RatesController(IRatesRepository ratesRepository, IStatisticsRepository statisticsRepository)
         {
+            StatisticsRepository = statisticsRepository;
             RatesRepository = ratesRepository;
         }
         // GET api/values
         [HttpGet]
         public string Get(string startDate, string endDate)
         {
+            var logStartTime = DateTime.Now;
+
             DateTime start;
             DateTime end;
 
@@ -28,7 +32,13 @@ namespace SpotHero.Services.Api.Controllers
             if (!DateTime.TryParse(endDate, out end))
                 throw new ArgumentException($"Could not parse ${nameof(endDate)}: {endDate} into a DateTime");
 
-            return RatesRepository.GetRateForTimePeriod(start, end)?.Price.ToString() ?? "NOT AVAILABLE";
+            var logEndTime = DateTime.Now;
+
+            var rate = RatesRepository.GetRateForTimePeriod(start, end)?.Price.ToString() ?? "NOT AVAILABLE";
+
+            StatisticsRepository.LogTime($"api/rates", (logEndTime - logStartTime).TotalSeconds);
+
+            return rate;
         }
         
     }
