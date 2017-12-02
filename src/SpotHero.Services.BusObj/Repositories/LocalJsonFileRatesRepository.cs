@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace SpotHero.Services.BusObj.Repositories
 {
-    public class LocalJsonFileRatesRepository : IRatesRepository
+    public class RatesRepository : IRatesRepository
     {
         protected IJsonFileRetrievalService JsonFileRetrievalService { get; }
 
         protected Dictionary<DayOfWeek, List<RateForTimePeriod>> RatesDictionary { get; }
 
-        public LocalJsonFileRatesRepository(IJsonFileRetrievalService jsonFileRetrievalService, IJsonFileParserService jsonFileParserService)
+        public RatesRepository(IJsonFileRetrievalService jsonFileRetrievalService, IJsonFileParserService jsonFileParserService)
 	    {
             var ratesJson = jsonFileRetrievalService.GetRatesJson();
             var rates = jsonFileParserService.GetRatesFromJson(ratesJson);

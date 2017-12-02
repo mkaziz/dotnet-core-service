@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SpotHero.Services.BusObj.Repositories;
+using SpotHero.Services.BusObj.Configuration;
+using SpotHero.Services.BusObj.Services;
 
 namespace SpotHero.Services.Api
 {
@@ -25,7 +27,11 @@ namespace SpotHero.Services.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<IRatesRepository, LocalJsonFileRatesRepository>();
+            services.AddScoped<IRatesRepository, RatesRepository>();
+            services.AddScoped<IJsonFileRetrievalService, JsonFileRetrievalService>();
+
+            services.AddSingleton(Configuration.GetSection("appSettings").Get<IAppSettings>());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

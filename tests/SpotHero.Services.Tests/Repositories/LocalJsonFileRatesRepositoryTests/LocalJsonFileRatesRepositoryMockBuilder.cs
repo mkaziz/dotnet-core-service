@@ -78,9 +78,9 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
             return this;
         }
 
-        public LocalJsonFileRatesRepository Build()
+        public RatesRepository Build()
         {
-            return new LocalJsonFileRatesRepository(JsonFileRetrievalService, JsonFileParserService);
+            return new RatesRepository(JsonFileRetrievalService, JsonFileParserService);
         }
 
     }
