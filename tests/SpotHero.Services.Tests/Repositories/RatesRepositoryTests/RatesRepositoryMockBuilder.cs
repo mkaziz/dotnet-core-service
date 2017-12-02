@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
+namespace SpotHero.Services.Tests.Repositories.RatesRepositoryTests
 {
-    public class LocalJsonFileRatesRepositoryMockBuilder
+    public class RatesRepositoryMockBuilder
     {
         protected IJsonFileRetrievalService JsonFileRetrievalService { get; set; }
         protected IJsonFileParserService JsonFileParserService { get; set; }
 
-        public LocalJsonFileRatesRepositoryMockBuilder()
+        public RatesRepositoryMockBuilder()
         {
             JsonFileRetrievalService = Substitute.For<IJsonFileRetrievalService>();
             JsonFileParserService = Substitute.For<IJsonFileParserService>();
@@ -66,13 +66,13 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
             });
         }
 
-        public LocalJsonFileRatesRepositoryMockBuilder BuildWith(IJsonFileRetrievalService jsonFileRetrievalService)
+        public RatesRepositoryMockBuilder BuildWith(IJsonFileRetrievalService jsonFileRetrievalService)
         {
             this.JsonFileRetrievalService = jsonFileRetrievalService;
             return this;
         }
 
-        public LocalJsonFileRatesRepositoryMockBuilder BuildWith(IJsonFileParserService jsonFileParserService)
+        public RatesRepositoryMockBuilder BuildWith(IJsonFileParserService jsonFileParserService)
         {
             this.JsonFileParserService = jsonFileParserService;
             return this;

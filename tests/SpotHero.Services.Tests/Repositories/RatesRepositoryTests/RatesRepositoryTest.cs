@@ -7,10 +7,10 @@ using SpotHero.Services.BusObj.Services;
 using System;
 using System.Collections.Generic;
 
-namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
+namespace SpotHero.Services.Tests.Repositories.RatesRepositoryTests
 {
     [TestClass]
-    public class LocalJsonFileRatesRepositoryTest
+    public class RatesRepositoryTest
     {
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
                 }
             });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+            var ratesRepo = new RatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
             //Act
             var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 4:50PM"), DateTime.Parse("Nov 27 2017, 4:10PM"));
@@ -67,7 +67,7 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
                 }
             });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+            var ratesRepo = new RatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
             //Act
             var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 28 2017, 4:00PM"), DateTime.Parse("Nov 28 2017, 4:10PM"));
@@ -99,7 +99,7 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
                 }
             });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+            var ratesRepo = new RatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
             //Act
             var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 4:10PM"), DateTime.Parse("Nov 27 2017, 4:50PM"));
@@ -136,7 +136,7 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
                 }
             });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+            var ratesRepo = new RatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
             //Act
             var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 2:10PM"), DateTime.Parse("Nov 27 2017, 4:50PM"));
