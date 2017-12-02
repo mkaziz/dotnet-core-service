@@ -145,96 +145,96 @@ namespace SpotHero.Services.Tests.Repositories.LocalJsonFileRatesRepositoryTests
             Assert.IsNull(result);
         }
 
-        [TestMethod]
-        public void GetJsonRates_RatesForTwoConnectedButDifferentBlocks_ReturnsHigherRate()
-        {
-            var jsonFileParserService = Substitute.For<IJsonFileParserService>();
-            jsonFileParserService.GetRatesFromJson(Arg.Any<string>()).Returns(new List<RatesForDay>
-            {
-                new RatesForDay
-                {
-                    Day = DayOfWeek.Monday,
-                    Rates = new List<RateForTimePeriod>
-                    {
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 2PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 4PM"),
-                           Price = 1500
-                       },
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 4PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 6PM"),
-                           Price = 2500
-                       },
-                    }
-                }
-            });
+        //[TestMethod]
+        //public void GetJsonRates_RatesForTwoConnectedButDifferentBlocks_ReturnsHigherRate()
+        //{
+        //    var jsonFileParserService = Substitute.For<IJsonFileParserService>();
+        //    jsonFileParserService.GetRatesFromJson(Arg.Any<string>()).Returns(new List<RatesForDay>
+        //    {
+        //        new RatesForDay
+        //        {
+        //            Day = DayOfWeek.Monday,
+        //            Rates = new List<RateForTimePeriod>
+        //            {
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 2PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 4PM"),
+        //                   Price = 1500
+        //               },
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 4PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 6PM"),
+        //                   Price = 2500
+        //               },
+        //            }
+        //        }
+        //    });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+        //    var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
-            //Act
-            var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 2:10PM"), DateTime.Parse("Nov 27 2017, 4:50PM"));
+        //    //Act
+        //    var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 2:10PM"), DateTime.Parse("Nov 27 2017, 4:50PM"));
 
-            //Assert
-            Assert.IsTrue(result.Price == 2500);
+        //    //Assert
+        //    Assert.IsTrue(result.Price == 2500);
 
-        }
+        //}
 
-        [TestMethod]
-        public void GetJsonRates_RatesForManyConnectedButDifferentBlocks_ReturnsHigherRate()
-        {
-            var jsonFileParserService = Substitute.For<IJsonFileParserService>();
-            jsonFileParserService.GetRatesFromJson(Arg.Any<string>()).Returns(new List<RatesForDay>
-            {
-                new RatesForDay
-                {
-                    Day = DayOfWeek.Monday,
-                    Rates = new List<RateForTimePeriod>
-                    {
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 2PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 3PM"),
-                           Price = 1500
-                       },
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 3PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 4PM"),
-                           Price = 2500
-                       },
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 4PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 5PM"),
-                           Price = 3500
-                       },
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 5PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 6PM"),
-                           Price = 1500
-                       },
-                       new RateForTimePeriod
-                       {
-                           StartTime = DateTime.Parse("Nov 27 2017, 6PM"),
-                           EndTime = DateTime.Parse("Nov 27 2017, 7PM"),
-                           Price = 6500
-                       },
-                    }
-                }
-            });
+        //[TestMethod]
+        //public void GetJsonRates_RatesForManyConnectedButDifferentBlocks_ReturnsHigherRate()
+        //{
+        //    var jsonFileParserService = Substitute.For<IJsonFileParserService>();
+        //    jsonFileParserService.GetRatesFromJson(Arg.Any<string>()).Returns(new List<RatesForDay>
+        //    {
+        //        new RatesForDay
+        //        {
+        //            Day = DayOfWeek.Monday,
+        //            Rates = new List<RateForTimePeriod>
+        //            {
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 2PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 3PM"),
+        //                   Price = 1500
+        //               },
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 3PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 4PM"),
+        //                   Price = 2500
+        //               },
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 4PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 5PM"),
+        //                   Price = 3500
+        //               },
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 5PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 6PM"),
+        //                   Price = 1500
+        //               },
+        //               new RateForTimePeriod
+        //               {
+        //                   StartTime = DateTime.Parse("Nov 27 2017, 6PM"),
+        //                   EndTime = DateTime.Parse("Nov 27 2017, 7PM"),
+        //                   Price = 6500
+        //               },
+        //            }
+        //        }
+        //    });
 
-            var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
+        //    var ratesRepo = new LocalJsonFileRatesRepositoryMockBuilder().BuildWith(jsonFileParserService).Build();
 
-            //Act
-            var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 3:10PM"), DateTime.Parse("Nov 27 2017, 5:50PM"));
+        //    //Act
+        //    var result = ratesRepo.GetRateForTimePeriod(DateTime.Parse("Nov 27 2017, 3:10PM"), DateTime.Parse("Nov 27 2017, 5:50PM"));
 
-            //Assert
-            Assert.IsTrue(result.Price == 3500);
+        //    //Assert
+        //    Assert.IsTrue(result.Price == 3500);
 
-        }
+        //}
     }
 }

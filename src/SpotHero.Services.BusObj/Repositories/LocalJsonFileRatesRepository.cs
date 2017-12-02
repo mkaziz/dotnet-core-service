@@ -20,7 +20,7 @@ namespace SpotHero.Services.BusObj.Repositories
             
         }
 
-        public RateForTimePeriod GetRateForTimePeriod(DateTime startTime, DateTime endTime) 
+        public RateForTimePeriod GetRateForTimePeriod(DateTime startTime, DateTime endTime)
         {
             if (startTime.Date != endTime.Date)
                 return null; // not supporting overnight parking at this time. 
@@ -35,6 +35,15 @@ namespace SpotHero.Services.BusObj.Repositories
 
             var activeRate = availableRates.FirstOrDefault(r => r.StartTime <= startTime && endTime <= r.EndTime);
 
+            // commented out per Chhay's instructions
+            //HandleOverlappingRate(startTime, endTime, availableRates, activeRate);
+
+            // if no match, returns null
+            return activeRate;
+        }
+
+        private static RateForTimePeriod HandleOverlappingRate(DateTime startTime, DateTime endTime, IOrderedEnumerable<RateForTimePeriod> availableRates, RateForTimePeriod activeRate)
+        {
             if (activeRate == null)
             {
                 // no perfect match
@@ -60,11 +69,8 @@ namespace SpotHero.Services.BusObj.Repositories
 
                 if (areContiguous)
                     return overlappingRates.OrderByDescending(r => r.Price).FirstOrDefault();
-                
             }
-
-            // if no match, returns null
-            return activeRate;
+            return null;
         }
     }
 }
