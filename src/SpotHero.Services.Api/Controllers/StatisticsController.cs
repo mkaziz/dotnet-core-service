@@ -27,9 +27,9 @@ namespace SpotHero.Services.Api.Controllers
         // GET api/values
         [HttpGet]
         [Route("GetAll")]
-        public List<KeyValuePair<string, double>> GetAll()
+        public IEnumerable<string> GetAll()
         {
-            return StatisticsRepository.GetAllAverageTimes();
+            return StatisticsRepository.GetAllAverageTimes().Select(k => $"{k.Key} - {k.Value}");
         }
 
     }
