@@ -1,3 +1,4 @@
+using SpotHero.Services.BusObj.Helpers;
 using SpotHero.Services.BusObj.Models.Server;
 using SpotHero.Services.BusObj.Services;
 using System;
@@ -31,7 +32,9 @@ namespace SpotHero.Services.BusObj.Repositories
             if (!RatesDictionary.ContainsKey(startTime.DayOfWeek))
                 return null; // garage not open
 
-            var availableRates = RatesDictionary[startTime.DayOfWeek].OrderBy(d => d.StartTime);
+            var availableRates = RatesDictionary[startTime.DayOfWeek]
+                                    .Select(r => GetNormalizedRateForTimePeriod(r, startTime, endTime))
+                                    .OrderBy(d => d.StartTime);
 
             var activeRate = availableRates.FirstOrDefault(r => r.StartTime <= startTime && endTime <= r.EndTime);
 
@@ -41,6 +44,17 @@ namespace SpotHero.Services.BusObj.Repositories
             // if no match, returns null
             return activeRate;
         }
+
+        private static RateForTimePeriod GetNormalizedRateForTimePeriod(RateForTimePeriod rate, DateTime startTime, DateTime endTime)
+        {
+            return new RateForTimePeriod
+            {
+                Price = rate.Price,
+                StartTime = startTime.GetDateTimeNextWeekday(rate.StartTime.DayOfWeek),
+                EndTime = endTime.GetDateTimeNextWeekday(rate.EndTime.DayOfWeek)
+            };
+        }
+
 
         private static RateForTimePeriod HandleOverlappingRate(DateTime startTime, DateTime endTime, IOrderedEnumerable<RateForTimePeriod> availableRates, RateForTimePeriod activeRate)
         {

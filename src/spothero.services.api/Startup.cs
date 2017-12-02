@@ -29,8 +29,9 @@ namespace SpotHero.Services.Api
             services.AddMvc();
             services.AddScoped<IRatesRepository, RatesRepository>();
             services.AddScoped<IJsonFileRetrievalService, JsonFileRetrievalService>();
+            services.AddScoped<IJsonFileParserService, JsonFileParserService>();
 
-            services.AddSingleton(Configuration.GetSection("appSettings").Get<IAppSettings>());
+            services.AddSingleton(Configuration.GetSection("appSettings").Get<AppSettings>() as IAppSettings);
 
         }
 

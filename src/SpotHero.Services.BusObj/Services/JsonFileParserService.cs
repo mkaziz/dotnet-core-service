@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SpotHero.Services.BusObj.Models.Client;
 using System.Globalization;
 using System.Linq;
+using SpotHero.Services.BusObj.Helpers;
 
 namespace SpotHero.Services.BusObj.Services
 {
@@ -44,8 +45,8 @@ namespace SpotHero.Services.BusObj.Services
                     ratesList.Add(new RateForTimePeriod
                     {
                         Price = clientRate.Price,
-                        StartTime = GetDateTimeNextWeekday(startTime, day),
-                        EndTime = GetDateTimeNextWeekday(startTime, day)
+                        StartTime = startTime.GetDateTimeNextWeekday(day),
+                        EndTime = endTime.GetDateTimeNextWeekday(day)
                     });
                 }
             }
@@ -90,12 +91,6 @@ namespace SpotHero.Services.BusObj.Services
             return result;
         }
 
-        //src: https://stackoverflow.com/questions/6346119/datetime-get-next-tuesday
-        private static DateTime GetDateTimeNextWeekday(DateTime start, DayOfWeek day)
-        {
-            // The (... + 7) % 7 ensures we end up with a value in the range [0, 6]
-            int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
-            return start.AddDays(daysToAdd);
-        }
+        
     }
 }

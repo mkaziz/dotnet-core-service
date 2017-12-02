@@ -7,6 +7,6 @@ namespace SpotHero.Services.BusObj.Models.Server
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        public Decimal Price { get; set; }
+        public int Price { get; set; }
     }
 }
