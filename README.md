@@ -11,24 +11,24 @@ To run it, clone the the project and load the solution in Visual Studio, and run
 * A "Rates" value in cents is returned
 
 ### Statistics
-There are two API EndPoints exposed. Note that statistics are saved in memory only, so if the application restarts, logged times will be lost. 
+There are two API EndPoints exposed. Note that statistics are saved in memory only, so if the application restarts, logged times will be lost. A future improvement could be to log these times into a  database. 
 
 #### `/api/statistics/getall`
 Returns a list of all API calls and associated average times. 
 
 #### `/api/statistics/getbykey?key=api/rates`
-Returns a list of the API call requested (by key)
+Returns the API call requested (by key) and its average time.
 
 ## Data Source
 * The data source is currently a local json file, whose path is configured in the `appsettings.json` of the Api project. 
-* This could in the future be updated to full from SQL via EF, or other more robust data sources
+* This could in the future be updated to full from SQL via EF, or other more robust data sources.
 * The data source is expected to correctly follow the format of the provided sample file. 
 
 ## Project Structure
 The project uses .NET Core Dependency Injection
 
 ### API Project
-This contains only the endpoint from which the data is accessed
+This contains only the endpoints from which the data is accessed
 
 ### BusObj Project
 The key class here is the `RatesRepository`. It basically uses the `JsonFileRetrievalService` and `JsonFileParserService` to create a set of models that are then used to perform the request.
