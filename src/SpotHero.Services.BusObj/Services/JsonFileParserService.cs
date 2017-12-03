@@ -27,7 +27,7 @@ namespace SpotHero.Services.BusObj.Services
             
             foreach (var clientRate in clientRatesList.Rates)
             {
-                var days = clientRate.Days.Split(',');
+                var days = clientRate.Days.Split(','); // days come as a comma-separated list
 
                 foreach (var dayStr in days)
                 {
@@ -51,6 +51,7 @@ namespace SpotHero.Services.BusObj.Services
                 }
             }
 
+            // convert to list in order to return
             return ratesDict.Keys.Select(k => new RatesForDay
             {
                 Day = k,
@@ -58,6 +59,7 @@ namespace SpotHero.Services.BusObj.Services
             }).ToList();
         }
 
+        // There's no easy .NET way of parsing a dayofweek, so we have to write a custom method for it
         private static DayOfWeek GetDayOfWeekFromString(string day)
         {
             DayOfWeek result = default(DayOfWeek);

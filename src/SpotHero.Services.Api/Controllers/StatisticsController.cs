@@ -16,7 +16,7 @@ namespace SpotHero.Services.Api.Controllers
         {
             StatisticsRepository = statisticsRepository;
         }
-        // GET api/values
+
         [HttpGet]
         [Route("GetByKey")]
         public string GetByKey(string key)
@@ -24,7 +24,6 @@ namespace SpotHero.Services.Api.Controllers
             return $"Average Response Time: {StatisticsRepository.GetAverageTime(key)}";
         }
 
-        // GET api/values
         [HttpGet]
         [Route("GetAll")]
         public IEnumerable<string> GetAll()

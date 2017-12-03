@@ -17,7 +17,7 @@ namespace SpotHero.Services.Api.Controllers
             StatisticsRepository = statisticsRepository;
             RatesRepository = ratesRepository;
         }
-        // GET api/values
+
         [HttpGet]
         public string Get(string startDate, string endDate)
         {

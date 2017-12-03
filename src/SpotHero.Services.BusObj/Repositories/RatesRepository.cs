@@ -55,7 +55,7 @@ namespace SpotHero.Services.BusObj.Repositories
             };
         }
 
-
+        // This method is not being used because overlapping rates are not allowed by the API
         private static RateForTimePeriod HandleOverlappingRate(DateTime startTime, DateTime endTime, IOrderedEnumerable<RateForTimePeriod> availableRates, RateForTimePeriod activeRate)
         {
             if (activeRate == null)
