@@ -47,11 +47,15 @@ namespace SpotHero.Services.BusObj.Repositories
 
         private static RateForTimePeriod GetNormalizedRateForTimePeriod(RateForTimePeriod rate, DateTime startTime, DateTime endTime)
         {
+            var newStartTime = startTime.GetDateTimeNextWeekday(rate.StartTime.DayOfWeek);
+            var newEndTime = endTime.GetDateTimeNextWeekday(rate.EndTime.DayOfWeek);
+
+            // normalize the rate to the Day of the starttime, and the time of the original rate
             return new RateForTimePeriod
             {
                 Price = rate.Price,
-                StartTime = startTime.GetDateTimeNextWeekday(rate.StartTime.DayOfWeek),
-                EndTime = endTime.GetDateTimeNextWeekday(rate.EndTime.DayOfWeek)
+                StartTime = new DateTime(newStartTime.Year, newStartTime.Month, newStartTime.Day, rate.StartTime.Hour, rate.StartTime.Minute, rate.StartTime.Second),
+                EndTime = new DateTime(newEndTime.Year, newEndTime.Month, newEndTime.Day, rate.EndTime.Hour, rate.EndTime.Minute, rate.EndTime.Second)
             };
         }
 

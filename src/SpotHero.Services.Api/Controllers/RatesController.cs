@@ -26,10 +26,10 @@ namespace SpotHero.Services.Api.Controllers
             DateTime start;
             DateTime end;
 
-            if (!DateTime.TryParse(startDate, out start))
+            if (!DateTime.TryParse(startDate, null, System.Globalization.DateTimeStyles.RoundtripKind, out start))
                 throw new ArgumentException($"Could not parse ${nameof(startDate)}: {startDate} into a DateTime");
 
-            if (!DateTime.TryParse(endDate, out end))
+            if (!DateTime.TryParse(endDate, null, System.Globalization.DateTimeStyles.RoundtripKind, out end))
                 throw new ArgumentException($"Could not parse ${nameof(endDate)}: {endDate} into a DateTime");
 
             var logEndTime = DateTime.Now;
