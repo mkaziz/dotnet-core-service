@@ -31,7 +31,7 @@ namespace SpotHero.Services.Api.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return $"{key} is valid a valid key";
+                return $"{key} is not a valid key";
             }
         }
 
